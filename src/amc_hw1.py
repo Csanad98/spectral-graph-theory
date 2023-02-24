@@ -1,6 +1,5 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-import numpy as np
 
 import is_g_k_colorable
 
@@ -29,8 +28,26 @@ def create_custom_graph():
     return g
 
 
+def create_custom_graph2():
+    g = nx.Graph()
+    g.add_nodes_from([i for i in range(1, 9)])
+    edges = [
+        (1, 2), (1, 3), (1, 4), (1, 6),
+        (2, 3), (2, 4), (2, 5),
+        (3, 4), (3, 8),
+        (4, 7),
+        (5, 6), (5, 7), (5, 8),
+        (6, 7), (6, 8),
+        (7, 8)
+    ]
+    g.add_edges_from(edges)
+    nx.draw_spring(g, with_labels=True)
+    plt.show()
+    return g
+
+
 if __name__ == "__main__":
-    g = create_custom_graph()
+    g = create_custom_graph2()
     print(g.degree)
     print(nx.normalized_laplacian_spectrum(g))
     gc = is_g_k_colorable.GraphColoring(g.number_of_nodes())
